@@ -1,8 +1,6 @@
 
 package com.piggymetrics.auth;
 
-import com.piggymetrics.auth.service.security.MongoUserDetailsService;
-
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +26,8 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import com.piggymetrics.auth.service.security.MongoUserDetailsService;
 
 @SpringBootApplication
 @EnableResourceServer
@@ -40,24 +37,6 @@ public class AuthApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(AuthApplication.class, args);
-    }
-
-    @Configuration
-    @EnableWebMvc
-    protected static class WebMvcConfig extends WebMvcConfigurerAdapter {
-
-        @Override
-        public void addCorsMappings(CorsRegistry registry) {
-            // @formatter:off
-            registry.addMapping("/oauth/token")
-                .allowedOrigins("http://127.0.0.1:6100")
-                .allowedMethods("GET", "POST")
-                //.allowedHeaders("header1", "header2", "header3")
-                //.exposedHeaders("header1", "header2")
-                .allowCredentials(false)
-                .maxAge(3600);
-            // @formatter:on
-        }
     }
 
     @Configuration
