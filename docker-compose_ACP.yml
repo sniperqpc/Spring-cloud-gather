@@ -1,0 +1,197 @@
+version: '2'
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    restart: always
+    ports:
+      - 15672:15672
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+    links:
+      - config
+
+  config:
+    environment:
+      CONFIG_SERVICE_PASSWORD: root
+    image: goodraincloudframeworks/piggymetrics-config
+    restart: always
+    ports:
+      - 8888:8888
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  registry:
+    environment:
+      CONFIG_SERVICE_PASSWORD: root
+    image: goodraincloudframeworks/piggymetrics-registry
+    links:
+      - config
+    restart: always
+    ports:
+      - 8761:8761
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  gateway:
+    environment:
+      CONFIG_SERVICE_PASSWORD: root
+    image: goodraincloudframeworks/piggymetrics-gateway
+    links:
+      - registry
+      - auth-service
+      - config
+    restart: always
+    ports:
+      - 4000:4000
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  auth-service:
+    environment:
+      CONFIG_SERVICE_PASSWORD: root
+      NOTIFICATION_SERVICE_PASSWORD: root
+      STATISTICS_SERVICE_PASSWORD: root
+      ACCOUNT_SERVICE_PASSWORD: root
+      MONGODB_PASSWORD: root
+    image: goodraincloudframeworks/piggymetrics-auth-service
+    links:
+      - config
+      - auth-mongodb
+      - registry
+    restart: always
+    ports:
+      - 5000:5000
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  auth-mongodb:
+    environment:
+      MONGODB_PASSWORD: root
+    image: goodraincloudframeworks/piggymetrics-mongodb
+    restart: always
+    ports:
+      - 27017:27017
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  account-service:
+    environment:
+      CONFIG_SERVICE_PASSWORD: root
+      ACCOUNT_SERVICE_PASSWORD: root
+      MONGODB_PASSWORD: root
+    image: goodraincloudframeworks/piggymetrics-account-service
+    links:
+      - config
+      - account-mongodb
+      - registry
+      - auth-service
+      - rabbitmq
+    restart: always
+    ports:
+      - 6000:6000
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  account-mongodb:
+    environment:
+      INIT_DUMP: account-service-dump.js
+      MONGODB_PASSWORD: root
+    image: goodraincloudframeworks/piggymetrics-mongodb
+    restart: always
+    ports:
+      - 27017:27017
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  statistics-service:
+    environment:
+      CONFIG_SERVICE_PASSWORD: root
+      MONGODB_PASSWORD: root
+      STATISTICS_SERVICE_PASSWORD: root
+    image: goodraincloudframeworks/piggymetrics-statistics-service
+    links:
+      - config
+      - statistics-mongodb
+      - registry
+      - auth-service
+      - rabbitmq
+    restart: always
+    ports:
+      - 7000:7000
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  statistics-mongodb:
+    environment:
+      MONGODB_PASSWORD: root
+    image: goodraincloudframeworks/piggymetrics-mongodb
+    restart: always
+    ports:
+      - 27017:27017
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  notification-service:
+    environment:
+      CONFIG_SERVICE_PASSWORD: root
+      MONGODB_PASSWORD: root
+      NOTIFICATION_SERVICE_PASSWORD: root
+    image: goodraincloudframeworks/piggymetrics-notification-service
+    links:
+      - config
+      - notification-mongodb
+      - registry
+      - auth-service
+      - rabbitmq
+    restart: always
+    ports:
+      - 8000:8000
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  notification-mongodb:
+    image: goodraincloudframeworks/piggymetrics-mongodb
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGODB_PASSWORD: root
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  monitoring:
+    environment:
+      CONFIG_SERVICE_PASSWORD: root
+    image: goodraincloudframeworks/piggymetrics-monitoring
+    restart: always
+    ports:
+      - 9000:8080
+      - 8989:8989
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"

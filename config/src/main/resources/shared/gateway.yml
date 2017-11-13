@@ -1,0 +1,48 @@
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 60000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1
+
+zuul:
+  ignoredServices: '*'
+  host:
+    connect-timeout-millis: 60000
+    socket-timeout-millis: 60000
+
+  routes:
+    auth-service:
+        path: /uaa/**
+        #url: http://auth-service:5000
+        serviceId: auth-service
+        stripPrefix: false
+        sensitiveHeaders:
+
+    account-service:
+        path: /accounts/**
+        serviceId: account-service
+        stripPrefix: false
+        sensitiveHeaders:
+
+    statistics-service:
+        path: /statistics/**
+        serviceId: statistics-service
+        stripPrefix: false
+        sensitiveHeaders:
+
+    notification-service:
+        path: /notifications/**
+        serviceId: notification-service
+        stripPrefix: false
+        sensitiveHeaders:
+
+server:
+  port: 4000

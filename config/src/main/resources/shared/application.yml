@@ -1,0 +1,39 @@
+logging:
+  level:
+    org.springframework.security: DEBUG
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+eureka:
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://localhost:5000/uaa/users/current
+  ignored:
+  - /css/**
+  - /js/**
+  - /images/**
+  - /webjars/**
+  - /**/favicon.ico
+  - /swagger-ui.html
+  - /swagger-resources/**
+  - /v2/api-docs
+spring:
+  rabbitmq:
+    host: localhost
+  zipkin:
+    base-url: http://127.0.0.1:8080
+  sleuth:
+    percentage: 1.0
+uaa:
+  oauthServerUri: /uaa/oauth/token

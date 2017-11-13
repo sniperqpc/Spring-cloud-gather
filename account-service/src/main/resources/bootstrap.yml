@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: account-service
+  cloud:
+    config:
+      uri: http://localhost:8888
+      fail-fast: true
+      password: 1234
+      username: user
+  datasource:
+    type: org.apache.tomcat.jdbc.pool.DataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/kjax?characterEncoding=UTF-8
+    username: root
+    password: 111111
+
+security:
+  ignored:
+  - /css/**
+  - /js/**
+  - /images/**
+  - /webjars/**
+  - /**/favicon.ico
+  - /swagger-ui.html
+  - /swagger-resources/**
+  - /v2/api-docs
+      
+mybatis:
+  mapper-locations:
+  - classpath:mapper/*.xml
+  
+mapper:
+  mappers:
+    - com.piggymetrics.account.repository.mybatis.UserMapper
+  not-empty: false
+  identity: MYSQL
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+uaa:
+  url: http://127.0.0.1:5000/uaa
+    

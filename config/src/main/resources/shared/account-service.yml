@@ -1,0 +1,31 @@
+security:
+  oauth2:
+    client:
+      clientId: account-service
+      clientSecret: '1234'
+      accessTokenUri: http://localhost:5000/uaa/oauth/token
+      grant-type: client_credentials
+      scope: server
+
+spring:
+  data:
+    mongodb:
+      host: 127.0.0.1
+      username: user
+      password: '1234'
+      database: piggymetrics
+      port: 27017
+
+server:
+  context-path: /accounts
+  port: 6100
+  
+swagger2:
+  title: 账户服务（Account）
+  description: Spring Cloud 微服务平台 - 账户服务
+  termsOfServiceUrl: https://github.com/sniperqpc
+  contact:
+    name: Roc Chiu
+    url: https://github.com/sniperqpc
+    email: 353386051@qq.com
+  version: V1.0

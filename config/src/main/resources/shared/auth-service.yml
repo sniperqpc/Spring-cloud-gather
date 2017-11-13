@@ -1,0 +1,22 @@
+spring:
+  data:
+    mongodb:
+      host: localhost
+      username: user
+      password: '1234'
+      database: piggymetrics
+      port: 27017
+
+server:
+  context-path: /uaa
+  port: 5000
+
+swagger2:
+  title: 授权服务（Auth）
+  description: Spring Cloud 微服务平台 - 授权服务
+  termsOfServiceUrl: https://github.com/sniperqpc
+  contact:
+    name: Roc Chiu
+    url: https://github.com/sniperqpc
+    email: 353386051@qq.com
+  version: V1.0

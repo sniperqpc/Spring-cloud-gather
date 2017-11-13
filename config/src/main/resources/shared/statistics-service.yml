@@ -1,0 +1,24 @@
+security:
+  oauth2:
+    client:
+      clientId: statistics-service
+      clientSecret: '1234'
+      accessTokenUri: http://localhost:5000/uaa/oauth/token
+      grant-type: client_credentials
+      scope: server
+
+spring:
+  data:
+    mongodb:
+      host: localhost
+      username: user
+      password: '1234'
+      database: piggymetrics
+      port: 27017
+
+server:
+  context-path: /statistics
+  port: 7000
+
+rates:
+  url: http://api.fixer.io
