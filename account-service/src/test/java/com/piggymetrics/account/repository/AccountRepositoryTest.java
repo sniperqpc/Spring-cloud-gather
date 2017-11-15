@@ -31,7 +31,7 @@ public class AccountRepositoryTest {
 		assertEquals(stub.getLastSeen(), found.getLastSeen());
 		assertEquals(stub.getNote(), found.getNote());
 		assertEquals(stub.getIncomes().size(), found.getIncomes().size());
-		assertEquals(stub.getExpenses().size(), found.getExpenses().size());
+		//assertEquals(stub.getExpenses().size(), found.getExpenses().size());
 	}
 
 	private Account getStubAccount() {
@@ -69,7 +69,7 @@ public class AccountRepositoryTest {
 		account.setNote("test note");
 		account.setLastSeen(new Date());
 		account.setSaving(saving);
-		account.setExpenses(Arrays.asList(grocery, vacation));
+		//account.setExpenses(Arrays.asList(grocery, vacation));
 		account.setIncomes(Arrays.asList(salary));
 
 		return account;

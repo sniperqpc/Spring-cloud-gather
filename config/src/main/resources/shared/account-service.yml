@@ -7,15 +7,6 @@ security:
       grant-type: client_credentials
       scope: server
 
-spring:
-  data:
-    mongodb:
-      host: 127.0.0.1
-      username: user
-      password: '1234'
-      database: piggymetrics
-      port: 27017
-
 server:
   context-path: /accounts
   port: 6100

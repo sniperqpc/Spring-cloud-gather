@@ -101,7 +101,7 @@ public class AccountServiceTest {
 		update.setName("test");
 		update.setNote("test note");
 		update.setIncomes(Arrays.asList(salary));
-		update.setExpenses(Arrays.asList(grocery));
+		//update.setExpenses(Arrays.asList(grocery));
 		update.setSaving(saving);
 
 		final Account account = new Account();
@@ -118,14 +118,14 @@ public class AccountServiceTest {
 		assertEquals(update.getSaving().getDeposit(), account.getSaving().getDeposit());
 		assertEquals(update.getSaving().getCapitalization(), account.getSaving().getCapitalization());
 
-		assertEquals(update.getExpenses().size(), account.getExpenses().size());
+		//assertEquals(update.getExpenses().size(), account.getExpenses().size());
 		assertEquals(update.getIncomes().size(), account.getIncomes().size());
 
-		assertEquals(update.getExpenses().get(0).getTitle(), account.getExpenses().get(0).getTitle());
-		assertEquals(0, update.getExpenses().get(0).getAmount().compareTo(account.getExpenses().get(0).getAmount()));
-		assertEquals(update.getExpenses().get(0).getCurrency(), account.getExpenses().get(0).getCurrency());
-		assertEquals(update.getExpenses().get(0).getPeriod(), account.getExpenses().get(0).getPeriod());
-		assertEquals(update.getExpenses().get(0).getIcon(), account.getExpenses().get(0).getIcon());
+		//assertEquals(update.getExpenses().get(0).getTitle(), account.getExpenses().get(0).getTitle());
+		//assertEquals(0, update.getExpenses().get(0).getAmount().compareTo(account.getExpenses().get(0).getAmount()));
+		//assertEquals(update.getExpenses().get(0).getCurrency(), account.getExpenses().get(0).getCurrency());
+		//assertEquals(update.getExpenses().get(0).getPeriod(), account.getExpenses().get(0).getPeriod());
+		//assertEquals(update.getExpenses().get(0).getIcon(), account.getExpenses().get(0).getIcon());
 		
 		assertEquals(update.getIncomes().get(0).getTitle(), account.getIncomes().get(0).getTitle());
 		assertEquals(0, update.getIncomes().get(0).getAmount().compareTo(account.getIncomes().get(0).getAmount()));
@@ -141,7 +141,7 @@ public class AccountServiceTest {
 	public void shouldFailWhenNoAccountsExistedWithGivenName() {
 		final Account update = new Account();
 		update.setIncomes(Arrays.asList(new Item()));
-		update.setExpenses(Arrays.asList(new Item()));
+		//update.setExpenses(Arrays.asList(new Item()));
 
 		when(accountService.findByName("test")).thenReturn(null);
 		accountService.saveChanges("test", update);

@@ -1,16 +1,25 @@
 package com.piggymetrics.account.domain;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.hibernate.validator.constraints.Length;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
-@Document(collection = "accounts")
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.validator.constraints.Length;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
+@Table(name = "uaa_account")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Account {
 
@@ -19,14 +28,15 @@ public class Account {
 
 	private Date lastSeen;
 
+	@JsonIgnore
+	@ManyToMany(targetEntity = Item.class, fetch = FetchType.EAGER)
+	@BatchSize(size = 20)
 	@Valid
 	private List<Item> incomes;
 
 	@Valid
-	private List<Item> expenses;
-
-	@Valid
 	@NotNull
+	@OneToOne(targetEntity = Saving.class, fetch = FetchType.EAGER)
 	private Saving saving;
 
 	@Length(min = 0, max = 20_000)
@@ -54,14 +64,6 @@ public class Account {
 
 	public void setIncomes(List<Item> incomes) {
 		this.incomes = incomes;
-	}
-
-	public List<Item> getExpenses() {
-		return expenses;
-	}
-
-	public void setExpenses(List<Item> expenses) {
-		this.expenses = expenses;
 	}
 
 	public Saving getSaving() {

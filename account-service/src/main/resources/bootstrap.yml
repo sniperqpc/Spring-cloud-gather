@@ -7,12 +7,6 @@ spring:
       fail-fast: true
       password: 1234
       username: user
-  datasource:
-    type: org.apache.tomcat.jdbc.pool.DataSource
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/kjax?characterEncoding=UTF-8
-    username: root
-    password: 111111
 
 security:
   ignored:

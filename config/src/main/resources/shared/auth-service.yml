@@ -1,11 +1,11 @@
-spring:
-  data:
-    mongodb:
-      host: localhost
-      username: user
-      password: '1234'
-      database: piggymetrics
-      port: 27017
+spring:   
+  redis:
+    cluster:
+      nodes:
+      - 127.0.0.1:6379
+      - 127.0.0.1:6380
+      - 127.0.0.1:6381
+      max-redirects: 6
 
 server:
   context-path: /uaa

@@ -29,6 +29,16 @@ security:
   - /swagger-resources/**
   - /v2/api-docs
 spring:
+  data:
+    jpa:
+      repositories:
+        enabled: true
+  datasource:
+    type: org.apache.tomcat.jdbc.pool.DataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/scg?characterEncoding=UTF-8
+    username: root
+    password: 111111
   rabbitmq:
     host: localhost
   zipkin:

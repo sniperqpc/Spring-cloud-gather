@@ -79,7 +79,7 @@ public class AccountServiceImpl implements AccountService {
 		Assert.notNull(account, "can't find account with name " + name);
 
 		account.setIncomes(update.getIncomes());
-		account.setExpenses(update.getExpenses());
+		//account.setExpenses(update.getExpenses());
 		account.setSaving(update.getSaving());
 		account.setNote(update.getNote());
 		account.setLastSeen(new Date());

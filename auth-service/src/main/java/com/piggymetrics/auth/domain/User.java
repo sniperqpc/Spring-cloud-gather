@@ -1,14 +1,20 @@
 package com.piggymetrics.auth.domain;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 
-@Document(collection = "users")
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "uaa_user")
 public class User implements UserDetails {
+
+	/** serialVersionUID */
+	private static final long serialVersionUID = -2028453732117468443L;
 
 	@Id
 	private String username;
