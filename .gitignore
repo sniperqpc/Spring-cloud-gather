@@ -16,3 +16,4 @@ target/
 .project
 .classpath
 .settings/org.eclipse.m2e.core.prefs
+account-service/.factorypath
