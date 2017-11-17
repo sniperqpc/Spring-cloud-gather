@@ -9,11 +9,11 @@
 # Maven
 log/
 target/
-**/.project
+/.project
 
 #eclipse
-.settings/
+.settings
 .project
 .classpath
-.springBeans
 .factorypath
+.springBeans
