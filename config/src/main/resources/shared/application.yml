@@ -28,6 +28,7 @@ security:
   - /swagger-ui.html
   - /swagger-resources/**
   - /v2/api-docs
+  - /
 spring:
   data:
     jpa:

@@ -2,10 +2,16 @@ package com.piggymetrics.account.domain;
 
 import org.hibernate.validator.constraints.Length;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+@Entity
+@Table(name = "uaa_user")
 public class User {
 
+	@Id
 	@NotNull
 	@Length(min = 3, max = 20)
 	private String username;

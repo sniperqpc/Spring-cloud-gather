@@ -1,11 +1,7 @@
 spring:   
   redis:
-    cluster:
-      nodes:
-      - 127.0.0.1:6379
-      - 127.0.0.1:6380
-      - 127.0.0.1:6381
-      max-redirects: 6
+    host: 127.0.0.1
+    port: 6379
 
 server:
   context-path: /uaa

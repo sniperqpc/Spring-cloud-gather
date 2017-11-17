@@ -46,7 +46,10 @@ var Login = function() {
             },
 
             submitHandler: function(form) {
-                form.submit(); // form validation success, call ajax form submit
+                //form.submit(); // form validation success, call ajax form submit
+            	var username = $(form[name="username"]).val();
+                var password = $(form[name="password"]).val();
+            	requestOauthToken(username, password);
             }
         });
 
@@ -128,7 +131,7 @@ var Login = function() {
         function format(state) {
             if (!state.id) { return state.text; }
             var $state = $(
-             '<span><img src="../assets/global/img/flags/' + state.element.value.toLowerCase() + '.png" class="img-flag" /> ' + state.text + '</span>'
+             '<span><img src="/assets/global/img/flags/' + state.element.value.toLowerCase() + '.png" class="img-flag" /> ' + state.text + '</span>'
             );
             
             return $state;
@@ -157,24 +160,6 @@ var Login = function() {
             focusInvalid: false, // do not focus the last invalid input
             ignore: "",
             rules: {
-
-                fullname: {
-                    required: true
-                },
-                email: {
-                    required: true,
-                    email: true
-                },
-                address: {
-                    required: true
-                },
-                city: {
-                    required: true
-                },
-                country: {
-                    required: true
-                },
-
                 username: {
                     required: true
                 },
@@ -221,7 +206,30 @@ var Login = function() {
             },
 
             submitHandler: function(form) {
-                form.submit();
+                //form.submit();
+            	var username = $(form[name="username"]).val();
+                var password = $(form[name="password"]).val();
+                
+                $.ajax({
+                	url: 'accounts/',
+                    datatype: 'json',
+                    type: "post",
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                        username: username,
+                        password: password
+                    }),
+                    success: function (data) {
+                        window.location.href = "page_user_login_1.html";
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        if (xhr.status == 400) {
+                            alert("Sorry, account with the same name already exists.");
+                        } else {
+                            alert("An error during account creation. Please, try again.");
+                        }
+                    }
+                });
             }
         });
 

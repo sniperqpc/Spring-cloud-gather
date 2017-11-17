@@ -7,3 +7,6 @@ spring:
       fail-fast: true
       password: '1234'
       username: user
+  jpa:
+    hibernate:
+      ddl-auto: update

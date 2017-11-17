@@ -11,13 +11,19 @@ package com.piggymetrics.account.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.pagehelper.PageInfo;
+import com.piggymetrics.account.domain.Account;
 import com.piggymetrics.account.domain.User;
 import com.piggymetrics.account.service.UserService;
 
@@ -52,4 +58,9 @@ public class UserController {
     public User create(User user) {
         return userService.createUser(user);
     }
+    
+    @RequestMapping(path = "/", method = RequestMethod.POST)
+	public User createNewAccount(@Valid @RequestBody User user) {
+		return userService.createUser(user);
+	}
 }

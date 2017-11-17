@@ -21,6 +21,7 @@ import org.springframework.util.Assert;
 import com.github.pagehelper.ISelect;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.piggymetrics.account.client.AuthServiceClient;
 import com.piggymetrics.account.domain.User;
 import com.piggymetrics.account.repository.mybatis.UserMapper;
 import com.piggymetrics.account.service.UserService;
@@ -33,6 +34,9 @@ public class UserServiceImpl implements UserService {
     
     @Autowired
     private UserMapper userMapper;
+    
+    @Autowired
+	private AuthServiceClient authClient;
     
     @Override
     public List<User> getAllUser() {
@@ -52,9 +56,7 @@ public class UserServiceImpl implements UserService {
         
         Assert.isNull(existing, "账户已存在: " + record.getUsername());
         
-        int result = userMapper.insert(record);
-        
-        Assert.isTrue(result == 1, "保存失败");
+        authClient.createUser(record);
         
         return record;
     }

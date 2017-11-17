@@ -585,6 +585,74 @@ var App = function() {
             }
        });       
     }
+   
+   /**
+    * Oauth2
+    */
+
+	var requestOauthToken = function(username, password) {
+
+		var success = false;
+
+		$.ajax({
+			url: 'uaa/oauth/token',
+			datatype: 'json',
+			type: 'post',
+			headers: {'Authorization': 'Basic YnJvd3NlcjoxMjM0'},
+			async: false,
+			data: {
+				scope: 'ui',
+				username: username,
+				password: password,
+				grant_type: 'password'
+			},
+			success: function (data) {
+				localStorage.setItem('token', data.access_token);
+				success = true;
+			},
+			error: function () {
+				removeOauthTokenFromStorage();
+			}
+		});
+
+		return success;
+	}
+
+	var getOauthTokenFromStorage = function() {
+		return localStorage.getItem('token');
+	}
+
+	var removeOauthTokenFromStorage = function() {
+		return localStorage.removeItem('token');
+	}
+	
+	/**
+	 * Current account
+	 */
+
+	var getCurrentAccount = function() {
+
+		var token = getOauthTokenFromStorage();
+		var account = null;
+
+		if (token) {
+			$.ajax({
+				url: '/uaa/users/current',
+				datatype: 'json',
+				type: 'get',
+				headers: {'Authorization': 'Bearer ' + token},
+				async: false,
+				success: function (data) {
+					account = data;
+				},
+				error: function () {
+					removeOauthTokenFromStorage();
+				}
+			});
+		}
+
+		return account;
+	}
     
     //* END:CORE HANDLERS *//
 
@@ -592,7 +660,11 @@ var App = function() {
 
         //main function to initiate the theme
         init: function() {
-            //IMPORTANT!!!: Do not modify the core handlers call order.
+        	requestOauthToken();
+        	getOauthTokenFromStorage();
+        	removeOauthTokenFromStorage();
+        	
+        	//IMPORTANT!!!: Do not modify the core handlers call order.
 
             //Core handlers
             handleInit(); // initialize core variables

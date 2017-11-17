@@ -40,8 +40,6 @@ public class AuthorizationServerConfiguration implements AuthorizationServerConf
 	@Autowired
 	private RedisConnectionFactory redisConnectionFactory;
 	
-	private TokenStore tokenStore = new RedisTokenStore(redisConnectionFactory);
-
 	@Autowired
 	private DataSource dataSource;
 
@@ -62,7 +60,7 @@ public class AuthorizationServerConfiguration implements AuthorizationServerConf
 
 		// @formatter:off
 		//clients.inMemory()
-		clients.jdbc(dataSource)
+		clients.inMemory()
 			.withClient("browser")
 			.secret("1234")
 			.authorizedGrantTypes("refresh_token", "password")
@@ -87,6 +85,7 @@ public class AuthorizationServerConfiguration implements AuthorizationServerConf
 
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+		TokenStore tokenStore = new RedisTokenStore(redisConnectionFactory);
 		// @formatter:off
         endpoints.tokenStore(tokenStore)
             .authenticationManager(authenticationManager)
