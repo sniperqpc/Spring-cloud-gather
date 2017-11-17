@@ -9,10 +9,11 @@
 # Maven
 log/
 target/
-/.project
+**/.project
 
 #eclipse
 .settings/
 .project
 .classpath
-.settings/org.eclipse.m2e.core.prefs
+.springBeans
+.factorypath
