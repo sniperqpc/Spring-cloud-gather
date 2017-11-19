@@ -1,3 +1,7 @@
+var loginPagePath = '/login.html';
+    
+var currentPagePath = window.location.pathname + window.location.search;
+
 /**
 Core script to handle the entire theme and core functions
 **/
@@ -11,14 +15,14 @@ var App = function() {
 
     var resizeHandlers = [];
 
-    var assetsPath = '../assets/';
+    var assetsPath = '/assets/';
 
     var globalImgPath = 'global/img/';
 
     var globalPluginsPath = 'global/plugins/';
 
     var globalCssPath = 'global/css/';
-
+    
     // theme layout color set
 
     var brandColors = {
@@ -585,74 +589,6 @@ var App = function() {
             }
        });       
     }
-   
-   /**
-    * Oauth2
-    */
-
-	var requestOauthToken = function(username, password) {
-
-		var success = false;
-
-		$.ajax({
-			url: 'uaa/oauth/token',
-			datatype: 'json',
-			type: 'post',
-			headers: {'Authorization': 'Basic YnJvd3NlcjoxMjM0'},
-			async: false,
-			data: {
-				scope: 'ui',
-				username: username,
-				password: password,
-				grant_type: 'password'
-			},
-			success: function (data) {
-				localStorage.setItem('token', data.access_token);
-				success = true;
-			},
-			error: function () {
-				removeOauthTokenFromStorage();
-			}
-		});
-
-		return success;
-	}
-
-	var getOauthTokenFromStorage = function() {
-		return localStorage.getItem('token');
-	}
-
-	var removeOauthTokenFromStorage = function() {
-		return localStorage.removeItem('token');
-	}
-	
-	/**
-	 * Current account
-	 */
-
-	var getCurrentAccount = function() {
-
-		var token = getOauthTokenFromStorage();
-		var account = null;
-
-		if (token) {
-			$.ajax({
-				url: '/uaa/users/current',
-				datatype: 'json',
-				type: 'get',
-				headers: {'Authorization': 'Bearer ' + token},
-				async: false,
-				success: function (data) {
-					account = data;
-				},
-				error: function () {
-					removeOauthTokenFromStorage();
-				}
-			});
-		}
-
-		return account;
-	}
     
     //* END:CORE HANDLERS *//
 
@@ -660,10 +596,6 @@ var App = function() {
 
         //main function to initiate the theme
         init: function() {
-        	requestOauthToken();
-        	getOauthTokenFromStorage();
-        	removeOauthTokenFromStorage();
-        	
         	//IMPORTANT!!!: Do not modify the core handlers call order.
 
             //Core handlers
@@ -1112,6 +1044,93 @@ var App = function() {
 
 }();
 
-jQuery(document).ready(function() {    
-   App.init(); // init metronic core componets
+/**
+ * Oauth2
+ */
+
+var requestOauthToken = function(username, password) {
+
+	var success = false;
+
+	$.ajax({
+		url: 'uaa/oauth/token',
+		datatype: 'json',
+		type: 'post',
+		headers: {'Authorization': 'Basic YnJvd3NlcjoxMjM0'},
+		async: false,
+		data: {
+			scope: 'ui',
+			username: username,
+			password: password,
+			grant_type: 'password'
+		},
+		success: function (data) {
+			localStorage.setItem('token', data.access_token);
+			success = true;
+		},
+		error: function () {
+			removeOauthTokenFromStorage();
+		}
+	});
+
+	return success;
+};
+
+var getOauthTokenFromStorage = function() {
+	return localStorage.getItem('token');
+};
+
+var removeOauthTokenFromStorage = function() {
+	return localStorage.removeItem('token');
+};
+
+/**
+ * Current account
+ */
+
+var getCurrentAccount = function() {
+
+	var token = getOauthTokenFromStorage();
+	var account = null;
+
+	if (token) {
+		$.ajax({
+			url: '/uaa/users/current',
+			datatype: 'json',
+			type: 'get',
+			headers: {'Authorization': 'Bearer ' + token},
+			async: false,
+			success: function (data) {
+				account = data;
+			},
+			error: function () {
+				removeOauthTokenFromStorage();
+				if (window.location.pathname != loginPagePath) {
+					window.location.href = loginPagePath + "?redirect=" + encodeURIComponent(currentPagePath);
+				}
+			}
+		});
+	} else {
+		if (window.location.pathname != loginPagePath) {
+			window.location.href = loginPagePath + "?redirect=" + encodeURIComponent(currentPagePath);
+		}
+	}
+
+	return account;
+};
+
+//获取url中的参数
+function getUrlParam(name) {
+	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");	//构造一个含有目标参数的正则表达式对象
+	var r = window.location.search.substr(1).match(reg);	//匹配目标参数
+	if (r != null) {
+		return unescape(r[2]);
+	}
+	return null;	//返回参数值
+}
+
+jQuery(document).ready(function() {
+	getCurrentAccount();
+	
+	App.init(); // init metronic core componets
 });

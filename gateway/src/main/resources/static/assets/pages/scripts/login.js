@@ -49,7 +49,14 @@ var Login = function() {
                 //form.submit(); // form validation success, call ajax form submit
             	var username = $(form[name="username"]).val();
                 var password = $(form[name="password"]).val();
-            	requestOauthToken(username, password);
+            	if (requestOauthToken(username, password)) {
+            		var redirect = getUrlParam('redirect');
+            		if (redirect) {
+            			window.location.href = redirect;
+            		}
+            		window.location.href = "index.html";
+            	}
+            	return false;
             }
         });
 
@@ -101,7 +108,9 @@ var Login = function() {
             },
 
             submitHandler: function(form) {
-                form.submit();
+                //form.submit();
+            	
+            	return false;
             }
         });
 
@@ -220,7 +229,7 @@ var Login = function() {
                         password: password
                     }),
                     success: function (data) {
-                        window.location.href = "page_user_login_1.html";
+                        window.location.href = "";
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
                         if (xhr.status == 400) {
@@ -230,6 +239,8 @@ var Login = function() {
                         }
                     }
                 });
+                
+                return false;
             }
         });
 
