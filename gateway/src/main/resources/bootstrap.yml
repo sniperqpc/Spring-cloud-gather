@@ -20,3 +20,10 @@ eureka:
 
 management:
   context-path: /management
+
+endpoints:
+  logfile:
+    enabled: true
+
+logging:
+  file: spring.log
