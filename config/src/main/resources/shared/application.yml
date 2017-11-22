@@ -29,6 +29,7 @@ security:
   - /swagger-resources/**
   - /v2/api-docs
   - /
+  - /management/**
 spring:
   data:
     jpa:
@@ -48,3 +49,6 @@ spring:
     percentage: 1.0
 uaa:
   oauthServerUri: /uaa/oauth/token
+  
+management:
+  context-path: /management

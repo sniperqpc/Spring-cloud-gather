@@ -10,3 +10,10 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+
+eureka:
+  instance:      
+    metadata-map:
+      management.context-path: /uaa/management
+    status-page-url-path: /uaa/management/info
+    health-check-url-path: /uaa/management/health

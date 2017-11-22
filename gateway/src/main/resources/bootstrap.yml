@@ -7,3 +7,16 @@ spring:
       fail-fast: true
       password: 1234
       username: user
+
+eureka:
+  instance:
+    metadata-map:
+      management.context-path: /management
+    status-page-url-path: /management/info
+    health-check-url-path: /management/health
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+management:
+  context-path: /management
