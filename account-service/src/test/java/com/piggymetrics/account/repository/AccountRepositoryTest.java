@@ -1,21 +1,26 @@
 package com.piggymetrics.account.repository;
 
-import com.piggymetrics.account.AccountApplication;
-import com.piggymetrics.account.domain.*;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Date;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.piggymetrics.account.AccountApplication;
+import com.piggymetrics.account.domain.Account;
+import com.piggymetrics.account.domain.Currency;
+import com.piggymetrics.account.domain.Item;
+import com.piggymetrics.account.domain.Saving;
+import com.piggymetrics.account.domain.TimePeriod;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = AccountApplication.class)
+@SpringBootTest(classes = AccountApplication.class)
 public class AccountRepositoryTest {
 
 	@Autowired

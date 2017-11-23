@@ -79,7 +79,12 @@ public class AuthorizationServerConfiguration implements AuthorizationServerConf
 			.withClient("notification-service")
 			.secret("1234")
 			.authorizedGrantTypes("client_credentials", "refresh_token")
-			.scopes("server");
+			.scopes("server")
+		.and()
+			.withClient("admin-server")
+			.secret("1234")
+			.authorizedGrantTypes("authorization_code", "refresh_token", "password")
+			.scopes("openid");
 		// @formatter:on
 	}
 
