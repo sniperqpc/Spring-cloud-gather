@@ -11,6 +11,7 @@
 	<modules>
 		<module>config</module>
 		<module>monitoring</module>
+		<module>admin-server</module>
 		<module>registry</module>
 		<module>gateway</module>
 		<module>auth-service</module>
