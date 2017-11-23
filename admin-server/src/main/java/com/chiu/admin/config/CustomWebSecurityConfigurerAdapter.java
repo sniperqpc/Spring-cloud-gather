@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -36,15 +37,19 @@ import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.WebUtils;
 
-@EnableOAuth2Sso
+//@Configuration
+//@EnableOAuth2Sso
 public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/applications").permitAll()//
-				.antMatchers("/mgmt/health").permitAll()//
-				.anyRequest().authenticated()//
-				.and().csrf().ignoringAntMatchers("/api/**", "/mgmt/**").csrfTokenRepository(csrfTokenRepository())
-				.and().addFilterAfter(csrfHeaderFilter(), CsrfFilter.class);
+		// @formatter:off
+		http.authorizeRequests()
+			.antMatchers(HttpMethod.POST, "/api/applications").permitAll()//
+			.antMatchers("/management/health").permitAll()//
+			.anyRequest().authenticated()//
+		.and().csrf().ignoringAntMatchers("/api/**", "/management/**").csrfTokenRepository(csrfTokenRepository())
+		.and().addFilterAfter(csrfHeaderFilter(), CsrfFilter.class);
+		// @formatter:on
 	}
 
 	private Filter csrfHeaderFilter() {

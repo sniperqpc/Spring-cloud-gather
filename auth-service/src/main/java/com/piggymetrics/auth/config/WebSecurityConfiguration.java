@@ -40,13 +40,37 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// @formatter:off
+//		http
+//			.authorizeRequests()
+//			.anyRequest()
+//			.authenticated()
+//		.and()
+//			.csrf()
+//			.disable();
+		// @formatter:on
+		
+		// @formatter:off
 		http
-			.authorizeRequests()
-			.anyRequest()
-			.authenticated()
-		.and()
-			.csrf()
-			.disable();
+			.formLogin()
+				.loginPage("/login")
+					.permitAll()
+			.and()
+				.requestMatchers()
+					.antMatchers("/login", "/oauth/authorize", "/oauth/confirm_access")
+			.and()
+				.authorizeRequests()
+					.anyRequest()
+					.authenticated()
+			.and()
+				.requestMatchers()
+					.antMatchers("/management/health")
+			.and()
+				.authorizeRequests()
+					.anyRequest()
+					.permitAll()
+			.and()
+				.csrf()
+					.ignoringAntMatchers("/oauth/**", "/management/**");
 		// @formatter:on
 	}
 

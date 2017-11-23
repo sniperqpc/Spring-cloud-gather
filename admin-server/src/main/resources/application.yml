@@ -19,6 +19,8 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
 
 security:
+  basic:
+    enabled: false
   oauth2:
     client:
       clientId: admin-server
@@ -27,6 +29,8 @@ security:
       userAuthorizationUri: http://localhost:5000/uaa/oauth/authorize
       #grant-type: client_credentials
       scope: openid
+    resource:
+      user-info-uri: http://localhost:5000/uaa/users/current
 
 server:
   context-path: /
