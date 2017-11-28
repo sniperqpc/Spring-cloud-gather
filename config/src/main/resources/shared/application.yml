@@ -29,7 +29,7 @@ security:
   - /swagger-resources/**
   - /v2/api-docs
   - /
-  - /management/**
+
 spring:
   data:
     jpa:
@@ -52,3 +52,5 @@ uaa:
   
 management:
   context-path: /management
+  security:
+    enabled: false

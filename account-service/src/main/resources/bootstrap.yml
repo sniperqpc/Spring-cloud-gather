@@ -7,17 +7,6 @@ spring:
       fail-fast: true
       password: 1234
       username: user
-
-security:
-  ignored:
-  - /css/**
-  - /js/**
-  - /images/**
-  - /webjars/**
-  - /**/favicon.ico
-  - /swagger-ui.html
-  - /swagger-resources/**
-  - /v2/api-docs
       
 mybatis:
   mapper-locations:

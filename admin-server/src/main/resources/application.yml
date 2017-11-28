@@ -7,6 +7,8 @@ spring:
         endpoints: env,metrics,dump,jolokia,info,configprops,trace,logfile,refresh,flyway,liquibase,heapdump,loggers,auditevents,hystrix.stream
       turbine:
         location: http://127.0.0.1:8989
+  aop:
+    proxy-target-class: true
 
 eureka:
   instance:

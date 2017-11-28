@@ -37,9 +37,10 @@ import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.WebUtils;
 
-//@Configuration
-//@EnableOAuth2Sso
+@Configuration
+@EnableOAuth2Sso
 public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
+	
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		// @formatter:off
