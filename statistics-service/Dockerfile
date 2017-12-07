@@ -1,5 +1,5 @@
 FROM java:8-jre
-MAINTAINER Alexander Lukyanchikov <sqshq@sqshq.com>
+MAINTAINER Chiu <sniperqpc@hotmail.com>
 
 ADD ./target/statistics-service.jar /app/
 CMD ["java", "-Xmx200m", "-jar", "/app/statistics-service.jar"]

@@ -17,3 +17,4 @@ target/
 .classpath
 .factorypath
 .springBeans
+*.log

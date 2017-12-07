@@ -1,8 +1,10 @@
 package com.piggymetrics.auth.domain;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -33,7 +35,11 @@ public class User implements UserDetails {
 
 	@Override
 	public List<GrantedAuthority> getAuthorities() {
-		return null;
+		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+		authorities.add(new SimpleGrantedAuthority("ROLE_ACTUATOR"));
+		return authorities;
 	}
 
 	public void setUsername(String username) {
