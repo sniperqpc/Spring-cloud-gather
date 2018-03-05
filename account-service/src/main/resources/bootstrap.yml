@@ -27,10 +27,16 @@ pagehelper:
 uaa:
   url: http://127.0.0.1:5000/uaa
   
+management:
+  context-path: /management
+  port: 6101
+  security:
+    enabled: false
+
 eureka:
   instance:      
     metadata-map:
-      management.context-path: /accounts/management
-    status-page-url-path: /accounts/management/info
-    health-check-url-path: /accounts/management/health
+      management.context-path: /management
+      management.port: 6101
+      
     

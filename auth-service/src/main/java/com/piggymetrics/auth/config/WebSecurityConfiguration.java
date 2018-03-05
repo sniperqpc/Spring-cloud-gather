@@ -63,7 +63,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 					.authenticated()
 			.and()
 				.requestMatchers()
-					.antMatchers("/management/health", "/management/trace")
+					.antMatchers("/management/**")
 			.and()
 				.authorizeRequests()
 					.anyRequest()

@@ -12,6 +12,9 @@ eureka:
   instance:
     prefer-ip-address: true
     ip-address: 127.0.0.1
+    metadata-map:
+      user.name: usr
+      user.password: pass
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
@@ -47,10 +50,16 @@ spring:
     base-url: http://127.0.0.1:8080
   sleuth:
     percentage: 1.0
+  boot:
+    admin:
+      client:
+        metadata:
+          user.name: usr
+          user.password: pass
+
 uaa:
   oauthServerUri: /uaa/oauth/token
   
 management:
-  context-path: /management
   security:
     enabled: false

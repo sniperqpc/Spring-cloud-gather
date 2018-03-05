@@ -15,7 +15,7 @@
 
 	<properties>
 		<hystrix.version>1.5.12</hystrix.version>
-		<boot.admin.version>1.5.4</boot.admin.version>
+		<boot.admin.version>1.5.7</boot.admin.version>
 	</properties>
 
 	<dependencies>

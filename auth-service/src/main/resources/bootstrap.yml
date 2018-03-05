@@ -10,10 +10,15 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-
+    
+management:
+  context-path: /management
+  port: 5001
+  security:
+    enabled: false
+    
 eureka:
   instance:      
     metadata-map:
-      management.context-path: /uaa/management
-    status-page-url-path: /uaa/management/info
-    health-check-url-path: /uaa/management/health
+      management.context-path: /management
+      management.port: 5001
