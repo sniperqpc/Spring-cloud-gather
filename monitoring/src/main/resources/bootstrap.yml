@@ -7,3 +7,9 @@ spring:
       fail-fast: true
       password: 1234
       username: user
+    
+management:
+  context-path: /management
+  port: 8186
+  security:
+    enabled: false

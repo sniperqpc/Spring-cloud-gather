@@ -9,17 +9,19 @@ spring:
       username: user
 
 eureka:
-  instance:
+  instance:      
     metadata-map:
       management.context-path: /management
-    status-page-url-path: /management/info
-    health-check-url-path: /management/health
+      management.port: 4001
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
 
 management:
   context-path: /management
+  port: 4001
+  security:
+    enabled: false
 
 endpoints:
   logfile:
