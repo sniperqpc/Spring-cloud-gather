@@ -18,6 +18,7 @@
 		<module>account-service</module>
 		<module>statistics-service</module>
 		<module>notification-service</module>
+		<module>zipkin-server-stream</module>
 	</modules>
 
 	<properties>

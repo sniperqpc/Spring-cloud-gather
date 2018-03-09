@@ -8,6 +8,9 @@ spring:
       password: 1234
       username: user
     
+server:
+  port: 9411
+    
 management:
   context-path: /management
   port: 8186

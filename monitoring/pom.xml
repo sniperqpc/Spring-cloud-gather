@@ -27,25 +27,6 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-stream-rabbit</artifactId>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 		    <groupId>de.codecentric</groupId> -->
-<!-- 		    <artifactId>spring-boot-admin-starter-client</artifactId> -->
-<!-- 		    <version>1.5.7</version> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.springframework.cloud</groupId> -->
-<!-- 			<artifactId>spring-cloud-starter-hystrix-dashboard</artifactId> -->
-<!-- 		</dependency> -->
-		
-<!-- 		<dependency> -->
-<!-- 			<groupId>io.zipkin.java</groupId> -->
-<!-- 			<artifactId>zipkin-autoconfigure-ui</artifactId> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>io.zipkin.java</groupId> -->
-<!-- 			<artifactId>zipkin-server</artifactId> -->
-<!-- 		</dependency> -->
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>

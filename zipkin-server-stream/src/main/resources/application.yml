@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: zipkin-server-stream
+  rabbitmq:
+    host: localhost
+
+server:
+  port: 9411
